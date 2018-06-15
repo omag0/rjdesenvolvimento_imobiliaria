@@ -54,8 +54,8 @@ public class PessoaFisica extends Cliente {
         this.genero = genero.getCodigo();
         this.estadoCivil = estadoCivil.getCodigo();
         this.pessoaFisicaTipo = pessoaFisicaTipo.getCodigo();
-        //this.pessoaJuridica = pessoaJuridica;
-        //this.usuario = usuario;
+        this.pessoaJuridica = pessoaJuridica;
+        this.usuario = usuario;
     }
 
     public String getNome() {
@@ -137,6 +137,7 @@ public class PessoaFisica extends Cliente {
     public void setPessoaFisicaTipo(PessoaFisicaTipo pessoaFisicaTipo) {
         this.pessoaFisicaTipo = pessoaFisicaTipo.getCodigo();
     }
+
     public List<Bairro> getEnderecos() {
         return enderecos;
     }
