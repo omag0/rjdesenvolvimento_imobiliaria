@@ -1,5 +1,7 @@
 package com.rjdesenvolvimento.imobiliaria.domain.enderecos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rjdesenvolvimento.imobiliaria.domain.EntidadeAbstrata;
 import com.rjdesenvolvimento.imobiliaria.domain.clientes.PessoaFisica;
 import com.rjdesenvolvimento.imobiliaria.domain.clientes.PessoaJuridica;
@@ -18,11 +20,14 @@ public class Bairro extends EntidadeAbstrata<Integer> {
     private String complemento;
     private String cep;
     private Integer tipoDeEndereco;
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "fk_bairro_cidade")
     private Cidade cidade;
+    @JsonBackReference
     @ManyToMany(mappedBy = "enderecos")
      private List<PessoaFisica> pessoasFisicas = new ArrayList<>();
+    @JsonBackReference
     @ManyToMany(mappedBy = "enderecos")
     private List<PessoaJuridica> pessoasJuridicas = new ArrayList<>();
 

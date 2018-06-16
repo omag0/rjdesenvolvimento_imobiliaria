@@ -1,5 +1,6 @@
 package com.rjdesenvolvimento.imobiliaria.domain.telefones;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.rjdesenvolvimento.imobiliaria.domain.EntidadeAbstrata;
 import com.rjdesenvolvimento.imobiliaria.domain.clientes.PessoaFisica;
 import com.rjdesenvolvimento.imobiliaria.domain.clientes.PessoaJuridica;
@@ -14,8 +15,10 @@ public class Telefone extends EntidadeAbstrata<Integer> {
 
     private String numero;
     private Integer tipoDeTelefone;
+    @JsonBackReference
     @ManyToMany(mappedBy = "telefones")
     private List<PessoaFisica> pessoasFisicas = new ArrayList<>();
+    @JsonBackReference
     @ManyToMany(mappedBy = "telefones")
     private List<PessoaJuridica> pessoasJuridicas = new ArrayList<>();
 

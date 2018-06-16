@@ -1,5 +1,7 @@
 package com.rjdesenvolvimento.imobiliaria.domain.clientes;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rjdesenvolvimento.imobiliaria.domain.enderecos.Bairro;
 import com.rjdesenvolvimento.imobiliaria.domain.enums.EstadoCivil;
 import com.rjdesenvolvimento.imobiliaria.domain.enums.Genero;
@@ -24,26 +26,30 @@ public class PessoaFisica extends Cliente {
     private Integer genero;
     private Integer estadoCivil;
     private Integer pessoaFisicaTipo;
+    @JsonBackReference
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaFisica")
     private Usuario usuario;
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(name = "pessoafisica_endereco", joinColumns = @JoinColumn(name = "pk_pessoafisica"),
             inverseJoinColumns = @JoinColumn(name = "pk_endereco"))
     private List<Bairro> enderecos = new ArrayList<>();
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(name = "pessoafisica_telefone", joinColumns = @JoinColumn(name = "fk_pessoafisica"),
             inverseJoinColumns = @JoinColumn(name = "pk_telefone"))
     private List<Telefone> telefones = new ArrayList<>();
-    @ManyToOne
-    @JoinColumn(name = "pk_pessoafisica_pessoajuridica")
-    private PessoaJuridica pessoaJuridica;
+    @JsonBackReference
+    @ManyToMany
+    @JoinTable(name = "pessoafisica_pessoajuridica", joinColumns = @JoinColumn(name = "fk_pessoafisica"),
+            inverseJoinColumns = @JoinColumn(name = "fk_pessoajuridica"))
+    private List<PessoaJuridica> pessoasJuridicas = new ArrayList<>();
 
     public PessoaFisica() {
     }
 
     public PessoaFisica(String nome, String cpf, String rg, String email, String dataDeNascimento, String naturalidade,
-                        String profissao, Genero genero, EstadoCivil estadoCivil, PessoaFisicaTipo pessoaFisicaTipo,
-                        PessoaJuridica pessoaJuridica, Usuario usuario) {
+                        String profissao, Genero genero, EstadoCivil estadoCivil, PessoaFisicaTipo pessoaFisicaTipo) {
         this.nome = nome;
         this.cpf = cpf;
         this.rg = rg;
@@ -54,8 +60,6 @@ public class PessoaFisica extends Cliente {
         this.genero = genero.getCodigo();
         this.estadoCivil = estadoCivil.getCodigo();
         this.pessoaFisicaTipo = pessoaFisicaTipo.getCodigo();
-        this.pessoaJuridica = pessoaJuridica;
-        this.usuario = usuario;
     }
 
     public String getNome() {
@@ -154,14 +158,6 @@ public class PessoaFisica extends Cliente {
         this.telefones = telefones;
     }
 
-    public PessoaJuridica getPessoaJuridica() {
-        return pessoaJuridica;
-    }
-
-    public void setPessoaJuridica(PessoaJuridica pessoaJuridica) {
-        this.pessoaJuridica = pessoaJuridica;
-    }
-
     public Usuario getUsuario() {
         return usuario;
     }
@@ -170,4 +166,11 @@ public class PessoaFisica extends Cliente {
         this.usuario = usuario;
     }
 
+    public List<PessoaJuridica> getPessoasJuridicas() {
+        return pessoasJuridicas;
+    }
+
+    public void setPessoasJuridicas(List<PessoaJuridica> pessoasJuridicas) {
+        this.pessoasJuridicas = pessoasJuridicas;
+    }
 }

@@ -1,5 +1,7 @@
 package com.rjdesenvolvimento.imobiliaria.domain.clientes;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rjdesenvolvimento.imobiliaria.domain.enderecos.Bairro;
 import com.rjdesenvolvimento.imobiliaria.domain.enums.PessoaJuridicaTipo;
 import com.rjdesenvolvimento.imobiliaria.domain.telefones.Telefone;
@@ -17,16 +19,22 @@ public class PessoaJuridica extends Cliente {
     private String inscricaoEstadual;
     private String inscricaoFederal;
     private Integer pessoaJuridicaTipo;
+    @JsonManagedReference
+    @ManyToMany(mappedBy = "pessoasJuridicas")
+    private List<PessoaFisica> sociosProprietarios = new ArrayList<>();
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(name = "pessoajuridica_endereco", joinColumns = @JoinColumn(name = "fk_pessoajuridica"),
             inverseJoinColumns = @JoinColumn(name = "fk_endereco"))
     private List<Bairro> enderecos = new ArrayList<>();
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(name = "pessoajuridica_telefone", joinColumns = @JoinColumn(name = "fk_pessoajuridica"),
             inverseJoinColumns = @JoinColumn(name = "fk_telefone"))
     private List<Telefone> telefones = new ArrayList<>();
-    @OneToMany(mappedBy = "pessoaJuridica")
-    private List<PessoaFisica> sociosProprietarios = new ArrayList<>();
+
+    public PessoaJuridica() {
+    }
 
     public PessoaJuridica(String razaoSocial, String nomeFantasia, String dataDeConstituicao, String inscricaoEstadual,
                           String inscricaoFederal, PessoaJuridicaTipo pessoaJuridicaTipo) {

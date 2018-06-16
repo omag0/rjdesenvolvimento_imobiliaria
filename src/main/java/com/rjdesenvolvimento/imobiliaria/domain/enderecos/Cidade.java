@@ -1,5 +1,7 @@
 package com.rjdesenvolvimento.imobiliaria.domain.enderecos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rjdesenvolvimento.imobiliaria.domain.EntidadeAbstrata;
 
 import javax.persistence.*;
@@ -10,9 +12,11 @@ import java.util.List;
 public class Cidade extends EntidadeAbstrata<Integer> {
 
     private String nome;
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "fk_cidade_estado")
-    private Estadao estado;
+    private Estado estado;
+    @JsonBackReference
     @OneToMany(mappedBy = "cidade")
     private List<Bairro> bairros = new ArrayList<>();
 
@@ -20,7 +24,7 @@ public class Cidade extends EntidadeAbstrata<Integer> {
     public Cidade() {
     }
 
-    public Cidade(String nome, Estadao estado) {
+    public Cidade(String nome, Estado estado) {
         this.nome = nome;
         this.estado = estado;
     }
@@ -33,11 +37,11 @@ public class Cidade extends EntidadeAbstrata<Integer> {
         this.nome = nome;
     }
 
-    public Estadao getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(Estadao estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 

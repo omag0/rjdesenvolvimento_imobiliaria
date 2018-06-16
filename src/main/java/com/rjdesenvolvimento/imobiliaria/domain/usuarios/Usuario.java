@@ -1,5 +1,6 @@
 package com.rjdesenvolvimento.imobiliaria.domain.usuarios;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rjdesenvolvimento.imobiliaria.domain.EntidadeAbstrata;
 import com.rjdesenvolvimento.imobiliaria.domain.clientes.PessoaFisica;
 
@@ -8,33 +9,20 @@ import javax.persistence.*;
 @Entity
 public class Usuario extends EntidadeAbstrata<Integer> {
 
-    @Id
-    private Integer id;
     private String login;
     private String senha;
+    @JsonManagedReference
     @OneToOne
     @JoinColumn(name = "pk_pessoafisica")
-    @MapsId
     private PessoaFisica pessoaFisica;
 
     public Usuario() {
     }
 
-    public Usuario(Integer id, String login, String senha, PessoaFisica pessoaFisica) {
-        this.id = id;
+    public Usuario(String login, String senha, PessoaFisica pessoaFisica) {
         this.login = login;
         this.senha = senha;
         this.pessoaFisica = pessoaFisica;
-    }
-
-    @Override
-    public Integer getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getLogin() {
