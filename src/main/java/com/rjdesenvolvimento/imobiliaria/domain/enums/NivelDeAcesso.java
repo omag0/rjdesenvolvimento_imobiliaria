@@ -3,23 +3,23 @@ package com.rjdesenvolvimento.imobiliaria.domain.enums;
 import lombok.Getter;
 
 @Getter
-public enum Genero {
+public enum NivelDeAcesso {
 
-    FEMININO(1, "Feminino"),
-    MASCULINO(2, "Masculino");
+    ADMINISTRADOR(1, "Administrador"),
+    CLIENTE(2, "Cliente");
 
     private int codigo;
     private String descricao;
 
-    Genero(int codigo, String descricao) {
+    NivelDeAcesso(int codigo, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
     }
 
-
-    public static Genero converteParaEnum(Integer codigo) {
+    public static NivelDeAcesso converteParaEnum(Integer codigo) {
         if (codigo == null) return null;
-        for (Genero x : Genero.values()) {
+
+        for (NivelDeAcesso x : NivelDeAcesso.values()) {
             if (codigo.equals(x.getCodigo())) {
                 return x;
             }
@@ -29,7 +29,7 @@ public enum Genero {
 
     public static String escrever(Integer codigo) {
         if (codigo == null) return null;
-        for (Genero x : Genero.values()) {
+        for (NivelDeAcesso x : NivelDeAcesso.values()) {
             if (codigo.equals(x.getCodigo())) {
                 return x.getDescricao();
             }

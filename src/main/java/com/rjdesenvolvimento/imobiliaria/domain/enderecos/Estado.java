@@ -4,15 +4,22 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rjdesenvolvimento.imobiliaria.domain.EntidadeAbstrata;
 import com.rjdesenvolvimento.imobiliaria.domain.enums.Uf;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 public class Estado extends EntidadeAbstrata<Integer> {
 
-    private String nome;
+    private String nomeDoEstado;
     private Integer uf;
     @JsonManagedReference
     @ManyToOne
@@ -25,41 +32,21 @@ public class Estado extends EntidadeAbstrata<Integer> {
     public Estado() {
     }
 
-    public Estado(String nome, Uf uf, Pais pais) {
-        this.nome = nome;
+    public Estado(String nomeDoEstado, Uf uf, Pais pais) {
+        this.nomeDoEstado = nomeDoEstado;
         this.uf = uf.getCodigo();
         this.pais = pais;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Uf getUf() {
-        return Uf.converteParaEnum(uf);
+    public String getUf() {
+        return Uf.escrever(uf);
     }
 
     public void setUf(Uf uf) {
         this.uf = uf.getCodigo();
     }
 
-    public List<Cidade> getCidades() {
-        return cidades;
-    }
-
-    public void setCidades(List<Cidade> cidades) {
-        this.cidades = cidades;
-    }
-
-    public Pais getPais() {
-        return pais;
-    }
-
-    public void setPais(Pais pais) {
-        this.pais = pais;
+    public Uf atulizarUf() {
+        return Uf.converteParaEnum(uf);
     }
 }

@@ -8,7 +8,6 @@ public class UsuarioDTO implements Serializable {
 
     private Integer id;
     private String login;
-    private String senha;
     private String nome;
 
     public UsuarioDTO() {
@@ -17,8 +16,8 @@ public class UsuarioDTO implements Serializable {
     public UsuarioDTO(Usuario objetoUsuario) {
         id = objetoUsuario.getId();
         login = objetoUsuario.getLogin();
-        senha = objetoUsuario.getSenha();
         nome = objetoUsuario.getPessoaFisica().getNome();
+
     }
 
     public Integer getId() {
@@ -35,14 +34,6 @@ public class UsuarioDTO implements Serializable {
 
     public void setLogin(String login) {
         this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public String getNome() {

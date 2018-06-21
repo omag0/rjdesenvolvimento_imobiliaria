@@ -5,15 +5,20 @@ import com.rjdesenvolvimento.imobiliaria.domain.EntidadeAbstrata;
 import com.rjdesenvolvimento.imobiliaria.domain.clientes.PessoaFisica;
 import com.rjdesenvolvimento.imobiliaria.domain.clientes.PessoaJuridica;
 import com.rjdesenvolvimento.imobiliaria.domain.enums.TipoDeTelefone;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 public class Telefone extends EntidadeAbstrata<Integer> {
 
-    private String numero;
+    private String numeroDoTelefone;
     private Integer tipoDeTelefone;
     @JsonBackReference
     @ManyToMany(mappedBy = "telefones")
@@ -26,41 +31,20 @@ public class Telefone extends EntidadeAbstrata<Integer> {
     public Telefone() {
     }
 
-    public Telefone(String numero, TipoDeTelefone tipoDeTelefone) {
-        this.numero = numero;
-        this.tipoDeTelefone = tipoDeTelefone.getCodigo();
+    public Telefone(String numeroDoTelefone, TipoDeTelefone tipoDeTelefone) {
+        this.numeroDoTelefone = numeroDoTelefone;
+        this.tipoDeTelefone = (tipoDeTelefone==null) ? null : tipoDeTelefone.getCodigo();
     }
 
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public TipoDeTelefone getTipoDeTelefone() {
-        return TipoDeTelefone.converteParaEnum(tipoDeTelefone);
+    public String getTipoDeTelefone() {
+        return TipoDeTelefone.escrever(tipoDeTelefone);
     }
 
     public void setTipoDeTelefone(TipoDeTelefone tipoDeTelefone) {
         this.tipoDeTelefone = tipoDeTelefone.getCodigo();
     }
 
-    public List<PessoaFisica> getPessoasFisicas() {
-        return pessoasFisicas;
-    }
-
-    public void setPessoasFisicas(List<PessoaFisica> pessoasFisicas) {
-        this.pessoasFisicas = pessoasFisicas;
-    }
-
-
-    public List<PessoaJuridica> getPessoasJuridicas() {
-        return pessoasJuridicas;
-    }
-
-    public void setPessoasJuridicas(List<PessoaJuridica> pessoasJuridicas) {
-        this.pessoasJuridicas = pessoasJuridicas;
+    public TipoDeTelefone atualizarTelefone() {
+        return TipoDeTelefone.converteParaEnum(tipoDeTelefone);
     }
 }

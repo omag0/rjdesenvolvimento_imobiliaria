@@ -1,5 +1,8 @@
 package com.rjdesenvolvimento.imobiliaria.domain.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum EstadoCivil {
 
     CASADO(1, "Casado"),
@@ -16,9 +19,6 @@ public enum EstadoCivil {
         this.descricao = descricao;
     }
 
-    public int getCodigo() { return codigo; }
-
-    public String getDescricao() { return descricao; }
 
     public static EstadoCivil converteParaEnum(Integer codigo) {
         if (codigo == null) return null;
@@ -28,7 +28,18 @@ public enum EstadoCivil {
                 return x;
             }
         }
-
         throw new IllegalArgumentException("Id inválido: " + codigo);
     }
+
+    public static String escrever(Integer codigo) {
+        if (codigo == null) return null;
+        for (EstadoCivil x : EstadoCivil.values()) {
+            if (codigo.equals(x.getCodigo())) {
+                return x.getDescricao();
+            }
+        }
+        throw new IllegalArgumentException("Id inválido: " + codigo);
+    }
+
+
 }

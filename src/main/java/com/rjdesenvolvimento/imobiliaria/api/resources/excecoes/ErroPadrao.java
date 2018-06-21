@@ -1,40 +1,25 @@
 package com.rjdesenvolvimento.imobiliaria.api.resources.excecoes;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 
+@Getter
+@Setter
 public class ErroPadrao implements Serializable {
 
-    private Integer status;
-    private String mensagem;
     private Long timeStamp;
+    private Integer status;
+    private String erro;
+    private String mensagem;
+    private String caminho;
 
-    public ErroPadrao(Integer status, String mensagem, Long timeStamp) {
-        this.status = status;
-        this.mensagem = mensagem;
+    public ErroPadrao(Long timeStamp, Integer status, String erro, String mensagem, String caminho) {
         this.timeStamp = timeStamp;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    public String getMensagem() {
-        return mensagem;
-    }
-
-    public void setMensagem(String mensagem) {
+        this.erro = erro;
         this.mensagem = mensagem;
-    }
-
-    public Long getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(Long timeStamp) {
-        this.timeStamp = timeStamp;
+        this.caminho = caminho;
     }
 }

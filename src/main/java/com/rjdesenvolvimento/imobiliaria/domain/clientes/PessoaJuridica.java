@@ -1,15 +1,18 @@
 package com.rjdesenvolvimento.imobiliaria.domain.clientes;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rjdesenvolvimento.imobiliaria.domain.enderecos.Bairro;
 import com.rjdesenvolvimento.imobiliaria.domain.enums.PessoaJuridicaTipo;
 import com.rjdesenvolvimento.imobiliaria.domain.telefones.Telefone;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 public class PessoaJuridica extends Cliente {
 
@@ -23,12 +26,12 @@ public class PessoaJuridica extends Cliente {
     @ManyToMany(mappedBy = "pessoasJuridicas")
     private List<PessoaFisica> sociosProprietarios = new ArrayList<>();
     @JsonManagedReference
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "pessoajuridica_endereco", joinColumns = @JoinColumn(name = "fk_pessoajuridica"),
             inverseJoinColumns = @JoinColumn(name = "fk_endereco"))
-    private List<Bairro> enderecos = new ArrayList<>();
+    private List<Bairro> bairros = new ArrayList<>();
     @JsonManagedReference
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "pessoajuridica_telefone", joinColumns = @JoinColumn(name = "fk_pessoajuridica"),
             inverseJoinColumns = @JoinColumn(name = "fk_telefone"))
     private List<Telefone> telefones = new ArrayList<>();
@@ -46,75 +49,15 @@ public class PessoaJuridica extends Cliente {
         this.pessoaJuridicaTipo = pessoaJuridicaTipo.getCodigo();
     }
 
-    public String getRazaoSocial() {
-        return razaoSocial;
-    }
-
-    public void setRazaoSocial(String razaoSocial) {
-        this.razaoSocial = razaoSocial;
-    }
-
-    public String getNomeFantasia() {
-        return nomeFantasia;
-    }
-
-    public void setNomeFantasia(String nomeFantasia) {
-        this.nomeFantasia = nomeFantasia;
-    }
-
-    public String getDataDeConstituicao() {
-        return dataDeConstituicao;
-    }
-
-    public void setDataDeConstituicao(String dataDeConstituicao) {
-        this.dataDeConstituicao = dataDeConstituicao;
-    }
-
-    public String getInscricaoEstadual() {
-        return inscricaoEstadual;
-    }
-
-    public void setInscricaoEstadual(String inscricaoEstadual) {
-        this.inscricaoEstadual = inscricaoEstadual;
-    }
-
-    public String getInscricaoFederal() {
-        return inscricaoFederal;
-    }
-
-    public void setInscricaoFederal(String inscricaoFederal) {
-        this.inscricaoFederal = inscricaoFederal;
-    }
-
-    public PessoaJuridicaTipo getPessoaJuridicaTipo() {
-        return PessoaJuridicaTipo.converteParaEnum(pessoaJuridicaTipo);
+    public String getPessoaJuridicaTipo() {
+        return PessoaJuridicaTipo.escrever(pessoaJuridicaTipo);
     }
 
     public void setPessoaJuridicaTipo(PessoaJuridicaTipo pessoaJuridicaTipo) {
         this.pessoaJuridicaTipo = pessoaJuridicaTipo.getCodigo();
     }
 
-    public List<Bairro> getEnderecos() {
-        return enderecos;
-    }
-
-    public void setEnderecos(List<Bairro> enderecos) {
-        this.enderecos = enderecos;
-    }
-
-    public List<Telefone> getTelefones() {
-        return telefones;
-    }
-
-    public void setTelefones(List<Telefone> telefones) {
-        this.telefones = telefones;
-    }
-
-    public List<PessoaFisica> getSociosProprietarios() {
-        return sociosProprietarios;
-    }
-
-    public void setSociosProprietarios(List<PessoaFisica> sociosProprietarios) {
-        this.sociosProprietarios = sociosProprietarios;
+    public PessoaJuridicaTipo atualizarPessoaJuridica() {
+        return PessoaJuridicaTipo.converteParaEnum(pessoaJuridicaTipo);
     }
 }

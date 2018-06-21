@@ -1,33 +1,13 @@
 package com.rjdesenvolvimento.imobiliaria;
 
-import com.rjdesenvolvimento.imobiliaria.domain.clientes.Cliente;
-import com.rjdesenvolvimento.imobiliaria.domain.clientes.PessoaFisica;
-import com.rjdesenvolvimento.imobiliaria.domain.clientes.PessoaJuridica;
-import com.rjdesenvolvimento.imobiliaria.domain.enderecos.Bairro;
-import com.rjdesenvolvimento.imobiliaria.domain.enderecos.Cidade;
-import com.rjdesenvolvimento.imobiliaria.domain.enderecos.Estado;
-import com.rjdesenvolvimento.imobiliaria.domain.enderecos.Pais;
-import com.rjdesenvolvimento.imobiliaria.domain.enums.*;
-import com.rjdesenvolvimento.imobiliaria.domain.telefones.Telefone;
-import com.rjdesenvolvimento.imobiliaria.domain.usuarios.Usuario;
-import com.rjdesenvolvimento.imobiliaria.repositories.enderecos.BairroRepository;
-import com.rjdesenvolvimento.imobiliaria.repositories.enderecos.CidadeRepository;
-import com.rjdesenvolvimento.imobiliaria.repositories.clientes.ClienteRepository;
-import com.rjdesenvolvimento.imobiliaria.repositories.enderecos.EstadoRepository;
-import com.rjdesenvolvimento.imobiliaria.repositories.enderecos.PaisRepository;
-import com.rjdesenvolvimento.imobiliaria.repositories.telefones.TelefoneRepository;
-import com.rjdesenvolvimento.imobiliaria.repositories.usuarios.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.Arrays;
-
 @SpringBootApplication
 public class ImobiliariaApplication implements CommandLineRunner {
 
-    @Autowired
+  /*  @Autowired
     private ClienteRepository clienteRepository;
     @Autowired
     private BairroRepository bairroRepository;
@@ -40,7 +20,7 @@ public class ImobiliariaApplication implements CommandLineRunner {
     @Autowired
     private TelefoneRepository telefoneRepository;
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsuarioRepository usuarioRepository;*/
 
 
     public static void main(String[] args) {
@@ -49,7 +29,7 @@ public class ImobiliariaApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
+/*
         Cliente cliente1 = new PessoaFisica("Rodrigo", "012.668.833-80", "12345", "rodrigo_batistasantos@hotmail.com",
                 "16/04/1985", "Goiania0", "Desenvolvedor", Genero.MASCULINO, EstadoCivil.CASADO, PessoaFisicaTipo.CLIENTE);
 
@@ -78,8 +58,8 @@ public class ImobiliariaApplication implements CommandLineRunner {
 
         cidade1.getBairros().addAll(Arrays.asList(bairro1, bairro2));
 
-        ((PessoaFisica) cliente1).getEnderecos().addAll(Arrays.asList(bairro1));
-        ((PessoaJuridica) cliente2).getEnderecos().addAll(Arrays.asList(bairro2));
+        ((PessoaFisica) cliente1).getBairros().addAll(Arrays.asList(bairro1));
+        ((PessoaJuridica) cliente2).getBairros().addAll(Arrays.asList(bairro2));
 
         bairro1.getPessoasFisicas().addAll(Arrays.asList((PessoaFisica) cliente1));
         bairro2.getPessoasJuridicas().addAll(Arrays.asList((PessoaJuridica) cliente2));
@@ -100,7 +80,7 @@ public class ImobiliariaApplication implements CommandLineRunner {
         bairroRepository.saveAll(Arrays.asList(bairro1, bairro2));
         telefoneRepository.saveAll(Arrays.asList(telefone1, telefone2));
         clienteRepository.saveAll(Arrays.asList(cliente1, cliente2));
-        usuarioRepository.saveAll(Arrays.asList(usuario1));
+        usuarioRepository.saveAll(Arrays.asList(usuario1));*/
 
 
     }

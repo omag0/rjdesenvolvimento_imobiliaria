@@ -3,15 +3,22 @@ package com.rjdesenvolvimento.imobiliaria.domain.enderecos;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rjdesenvolvimento.imobiliaria.domain.EntidadeAbstrata;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 public class Cidade extends EntidadeAbstrata<Integer> {
 
-    private String nome;
+    private String nomeDaCidade;
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "fk_cidade_estado")
@@ -24,32 +31,9 @@ public class Cidade extends EntidadeAbstrata<Integer> {
     public Cidade() {
     }
 
-    public Cidade(String nome, Estado estado) {
-        this.nome = nome;
+    public Cidade(Integer id, String nomeDaCidade, Estado estado) {
+        super.setId(id);
+        this.nomeDaCidade = nomeDaCidade;
         this.estado = estado;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
-
-    public List<Bairro> getBairros() {
-        return bairros;
-    }
-
-    public void setBairros(List<Bairro> bairros) {
-        this.bairros = bairros;
     }
 }
